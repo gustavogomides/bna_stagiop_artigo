@@ -78,7 +78,7 @@ rule PacienteReadOwnNovosExamesEventos {
   action: ALLOW
 }
 rule PacienteReadOwnExamesIniciadosEventos {
-  description: "Allow pacientes to view their exames iniciaados events"
+  description: "Allow pacientes to view their exames iniciados events"
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
   resource(t): "com.ita.stagiopbd.ExameIniciadoEvent"
@@ -101,6 +101,62 @@ rule PacienteReadOwnLots {
   condition: (s.paciente.getIdentifier() == c.getIdentifier())
   action: ALLOW  
 }
+rule PacienteReadOwnConsultasMarcadas {
+  description: "Allow pacientes to view their consultas"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.MarcarConsulta"
+  condition: (t.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnConsultasIniciadas {
+  description: "Allow pacientes to view their consultas iniciadas"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.IniciarConsulta"
+  condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnConsultasFinalizadas {
+  description: "Allow pacientes to view their consultas finalizadas"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.FinalizarConsulta"
+  condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnConsultasMarcadasEventos {
+  description: "Allow pacientes to view their novos consultas events"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.MarcarConsultaEvent"
+  condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnConsultasIniciadasEventos {
+  description: "Allow pacientes to view their consultas iniciados events"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.IniciarConsultaEvent"
+  condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnConsultasFinalizadasEventos {
+  description: "Allow pacientes to view their consultas finalizados events"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.FinalizarConsultaEvent"
+  condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnConsultas {
+  description: "Allow pacientes to view consultas they own"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(s): "com.ita.stagiopbd.Consulta"
+  condition: (s.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW  
+}
 rule PacienteReadOwnPaciente {
   description: "Allow pacientes to view their info"
   participant(c): "com.ita.stagiopbd.Paciente"
@@ -116,12 +172,13 @@ rule PacienteReadMedicos {
   resource: "com.ita.stagiopbd.Medico"
   action: ALLOW
 }
+
 rule PacienteReadHistorianRecord {
   description: "Allow pacientes to view their historian records"
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
   resource(hr): "org.hyperledger.composer.system.HistorianRecord"
-  condition: ((hr.transactionType == "com.ita.stagiopbd.NovoExame" || hr.transactionType == "com.ita.stagiopbd.ExameIniciado" || hr.transactionType == "com.ita.stagiopbd.ExameFinalizado") && hr.transactionInvoked.exame.paciente.getIdentifier() == c.getIdentifier())
+  condition: ((hr.transactionType == "com.ita.stagiopbd.NovoExame"  || hr.transactionType == "com.ita.stagiopbd.ExameIniciado" || hr.transactionType == "com.ita.stagiopbd.ExameFinalizado" || hr.transactionType == "com.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "com.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "com.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.paciente.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.paciente.getIdentifier() == c.getIdentifier())))
   action: ALLOW
 }
 
@@ -160,7 +217,7 @@ rule MedicoReadOwnNovosExamesEventos {
   action: ALLOW
 }
 rule MedicoReadOwnExamesIniciadosEventos {
-  description: "Allow medicos to view their exames iniciaados events"
+  description: "Allow medicos to view their exames iniciados events"
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
   resource(t): "com.ita.stagiopbd.ExameIniciadoEvent"
@@ -180,6 +237,62 @@ rule MedicoReadOwnLots {
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
   resource(s): "com.ita.stagiopbd.Exame"
+  condition: (s.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW  
+}
+rule MedicoReadOwnConsultasMarcadas {
+  description: "Allow pacientes to view their consultas"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.MarcarConsulta"
+  condition: (t.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnConsultasIniciadas {
+  description: "Allow pacientes to view their consultas iniciadas"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.IniciarConsulta"
+  condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnConsultasFinalizadas {
+  description: "Allow pacientes to view their consultas finalizadas"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.FinalizarConsulta"
+  condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnConsultasMarcadasEventos {
+  description: "Allow pacientes to view their novos consultas events"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.MarcarConsultaEvent"
+  condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnConsultasIniciadasEventos {
+  description: "Allow pacientes to view their consultas iniciados events"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.IniciarConsultaEvent"
+  condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnConsultasFinalizadasEventos {
+  description: "Allow pacientes to view their consultas finalizados events"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.FinalizarConsultaEvent"
+  condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnConsultas {
+  description: "Allow pacientes to view consultas they own"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(s): "com.ita.stagiopbd.Consulta"
   condition: (s.medico.getIdentifier() == c.getIdentifier())
   action: ALLOW  
 }
@@ -203,6 +316,7 @@ rule MedicoReadHistorianRecord {
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
   resource(hr): "org.hyperledger.composer.system.HistorianRecord"
-  condition: ((hr.transactionType == "com.ita.stagiopbd.NovoExame" || hr.transactionType == "com.ita.stagiopbd.ExameIniciado" || hr.transactionType == "com.ita.stagiopbd.ExameFinalizado") && hr.transactionInvoked.exame.medico.getIdentifier() == c.getIdentifier())
+  condition: ((hr.transactionType == "com.ita.stagiopbd.NovoExame"  || hr.transactionType == "com.ita.stagiopbd.ExameIniciado" || hr.transactionType == "com.ita.stagiopbd.ExameFinalizado" || hr.transactionType == "com.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "com.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "com.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.medico.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.medico.getIdentifier() == c.getIdentifier())))
   action: ALLOW
 }
+

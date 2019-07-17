@@ -17,6 +17,17 @@ enum ExameStatus {
   o PROCESSADO
 }
 
+enum ConsultaStatus {
+  o MARCADA
+  o EM_EXECUCAO
+  o FINALIZADA
+}
+
+enum ConsultaTipo {
+  o PRIMEIRA_VEZ
+  o RETORNO
+}
+
 /*** PARTICIPANTS ***/
 
 abstract participant Pessoa identified by pessoaId {
@@ -48,6 +59,15 @@ asset Exame identified by exameId {
   --> Medico medico
 }
 
+asset Consulta identified by consultaId {
+  o String consultaId
+  o DateTime dataConsulta
+  o ConsultaStatus status
+  o ConsultaTipo tipo
+  --> Medico medico
+  --> Paciente paciente
+}
+
 /*** TRANSACTIONS ***/
 
 transaction NovoExame {
@@ -64,6 +84,20 @@ transaction ExameFinalizado {
   --> Exame exame
 }
 
+transaction MarcarConsulta {
+  --> Medico medico
+  --> Paciente paciente
+  --> Consulta consulta
+}
+
+transaction IniciarConsulta {
+  --> Consulta consulta
+}
+
+transaction FinalizarConsulta {
+  --> Consulta consulta
+}
+
 /*** EVENTS ***/
 
 event NovoExameEvent {
@@ -76,4 +110,16 @@ event ExameIniciadoEvent {
 
 event ExameFinalizadoEvent {
   --> Exame exame
+}
+
+event MarcarConsultaEvent {
+  --> Consulta consulta
+}
+
+event IniciarConsultaEvent {
+  --> Consulta consulta
+}
+
+event FinalizarConsultaEvent {
+  --> Consulta consulta
 }
