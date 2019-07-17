@@ -1,17 +1,4 @@
-/*
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
+/* Admin */
 rule NetworkAdminUser {
     description: "Grant business network administrators full access to user resources"
     participant: "org.hyperledger.composer.system.NetworkAdmin"
@@ -19,11 +6,203 @@ rule NetworkAdminUser {
     resource: "**"
     action: ALLOW
 }
-
 rule NetworkAdminSystem {
     description: "Grant business network administrators full access to system resources"
     participant: "org.hyperledger.composer.system.NetworkAdmin"
     operation: ALL
     resource: "org.hyperledger.composer.system.**"
     action: ALLOW
+}
+
+/* Common */
+rule CommonReadTransactionRegistry {
+    description: "Allow all participants to read transaction registry"
+    participant: "org.hyperledger.composer.system.Participant"
+    operation: READ
+    resource: "org.hyperledger.composer.system.TransactionRegistry"
+    action: ALLOW
+}
+rule CommonReadParticipantRegistry {
+    description: "Allow all participants to read participant registry"
+    participant: "org.hyperledger.composer.system.Participant"
+    operation: READ
+    resource: "org.hyperledger.composer.system.ParticipantRegistry"
+    action: ALLOW
+}
+rule CommonReadAssetRegistry {
+    description: "Allow all participants to read asset registry"
+    participant: "org.hyperledger.composer.system.Participant"
+    operation: READ
+    resource: "org.hyperledger.composer.system.AssetRegistry"
+    action: ALLOW
+}
+rule CommonReadNetwork {
+    description: "Allow all participants to read network"
+    participant: "org.hyperledger.composer.system.Participant"
+    operation: READ
+    resource: "org.hyperledger.composer.system.Network"
+    action: ALLOW
+}
+
+/* Paciente */
+rule PacienteReadOwnNovoExames {
+  description: "Allow pacientes to view their exames"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.NovoExame"
+  condition: (t.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnExamesIniciados {
+  description: "Allow pacientes to view their exames iniciados"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.ExameIniciado"
+  condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnExamesFinalizados {
+  description: "Allow pacientes to view their exames finalizados"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.ExameFinalizado"
+  condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnNovosExamesEventos {
+  description: "Allow pacientes to view their novos exames events"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.NovoExameEvent"
+  condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnExamesIniciadosEventos {
+  description: "Allow pacientes to view their exames iniciaados events"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.ExameIniciadoEvent"
+  condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnExamesFinalizadosEventos {
+  description: "Allow pacientes to view their exames finalizados events"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.ExameFinalizadoEvent"
+  condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule PacienteReadOwnLots {
+  description: "Allow pacientes to view exames they own"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(s): "com.ita.stagiopbd.Exame"
+  condition: (s.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW  
+}
+rule PacienteReadOwnPaciente {
+  description: "Allow pacientes to view their info"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(cc): "com.ita.stagiopbd.Paciente"
+  condition: (cc.getIdentifier() == c.getIdentifier())
+  action: ALLOW  
+}
+rule PacienteReadMedicos {
+  description: "Allow pacientes to view medicos"
+  participant: "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource: "com.ita.stagiopbd.Medico"
+  action: ALLOW
+}
+rule PacienteReadHistorianRecord {
+  description: "Allow pacientes to view their historian records"
+  participant(c): "com.ita.stagiopbd.Paciente"
+  operation: READ
+  resource(hr): "org.hyperledger.composer.system.HistorianRecord"
+  condition: ((hr.transactionType == "com.ita.stagiopbd.NovoExame" || hr.transactionType == "com.ita.stagiopbd.ExameIniciado" || hr.transactionType == "com.ita.stagiopbd.ExameFinalizado") && hr.transactionInvoked.exame.paciente.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+
+
+/* Medico */
+rule MedicoReadOwnNovoExames {
+  description: "Allow medicos to view their exames"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.NovoExame"
+  condition: (t.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnExamesIniciados {
+  description: "Allow medicos to view their exames iniciados"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.ExameIniciado"
+  condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnExamesFinalizados {
+  description: "Allow medicos to view their exames finalizados"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.ExameFinalizado"
+  condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnNovosExamesEventos {
+  description: "Allow medicos to view their novos exames events"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.NovoExameEvent"
+  condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnExamesIniciadosEventos {
+  description: "Allow medicos to view their exames iniciaados events"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.ExameIniciadoEvent"
+  condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnExamesFinalizadosEventos {
+  description: "Allow medicos to view their exames finalizados events"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(t): "com.ita.stagiopbd.ExameFinalizadoEvent"
+  condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
+}
+rule MedicoReadOwnLots {
+  description: "Allow medicos to view exames they own"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(s): "com.ita.stagiopbd.Exame"
+  condition: (s.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW  
+}
+rule MedicoReadOwnMedico {
+  description: "Allow medicos to view their info"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(cc): "com.ita.stagiopbd.Medico"
+  condition: (cc.getIdentifier() == c.getIdentifier())
+  action: ALLOW  
+}
+// rule MedicoReadPacientes {
+//   description: "Allow medicos to view pacientes"
+//   participant: "com.ita.stagiopbd.Medico"
+//   operation: READ
+//   resource: "com.ita.stagiopbd.Medico"
+//   action: ALLOW
+// }
+rule MedicoReadHistorianRecord {
+  description: "Allow medicos to view their historian records"
+  participant(c): "com.ita.stagiopbd.Medico"
+  operation: READ
+  resource(hr): "org.hyperledger.composer.system.HistorianRecord"
+  condition: ((hr.transactionType == "com.ita.stagiopbd.NovoExame" || hr.transactionType == "com.ita.stagiopbd.ExameIniciado" || hr.transactionType == "com.ita.stagiopbd.ExameFinalizado") && hr.transactionInvoked.exame.medico.getIdentifier() == c.getIdentifier())
+  action: ALLOW
 }

@@ -45,6 +45,7 @@ asset Exame identified by exameId {
   o DateTime dataSolicitacao
   o DateTime dataResultado optional
   --> Paciente paciente
+  --> Medico medico
 }
 
 /*** TRANSACTIONS ***/
