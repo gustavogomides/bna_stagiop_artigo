@@ -1,0 +1,78 @@
+
+namespace com.ita.stagiopbd
+
+concept Endereco {
+  o String municipio
+  o String uf
+  o String logradouro
+  o String numero
+  o String complemento optional
+  o String bairro
+  o String cep
+}
+
+enum ExameStatus {
+  o PENDENTE
+  o EM_PROCESSAMENTO
+  o PROCESSADO
+}
+
+/*** PARTICIPANTS ***/
+
+abstract participant Pessoa identified by pessoaId {
+  o String pessoaId
+  o String nome
+  o String cpf
+  o String dataNascimento
+  o String email
+  o Endereco endereco
+  o String observacao optional
+}
+
+participant Paciente extends Pessoa {
+}
+
+participant Medico extends Pessoa {
+  o String crm
+}
+
+/*** ASSETS ***/
+
+asset Exame identified by exameId {
+  o String exameId
+  o String nome
+  o ExameStatus status
+  o DateTime dataSolicitacao
+  o DateTime dataResultado optional
+  --> Paciente paciente
+}
+
+/*** TRANSACTIONS ***/
+
+transaction NovoExame {
+  --> Medico medico
+  --> Paciente paciente
+  --> Exame exame
+}
+
+transaction ExameIniciado {
+  --> Exame exame
+}
+
+transaction ExameFinalizado {
+  --> Exame exame
+}
+
+/*** EVENTS ***/
+
+event NovoExameEvent {
+  --> Exame exame
+}
+
+event ExameIniciadoEvent {
+  --> Exame exame
+}
+
+event ExameFinalizadoEvent {
+  --> Exame exame
+}
