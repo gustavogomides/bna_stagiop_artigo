@@ -135,6 +135,12 @@ transaction ContratarFornecedor {
   --> Hospital hospital
 }
 
+transaction EnviarExameParaFornecedor {
+  --> Hospital hospital
+  --> Fornecedor fornecedor
+  --> Exame exame
+}
+
 /*** EVENT ***/
 
 event MarcarExameEvent {
