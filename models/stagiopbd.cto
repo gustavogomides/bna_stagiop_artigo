@@ -20,6 +20,12 @@ enum ConsultaTipo {
   o RETORNO
 }
 
+enum EspecialidadeFornecedor {
+  o EXAME_SANGUE
+  o EXAME_SARAMPO
+  o EXAME_HIV
+}
+
 /*** CONCEPT ***/
 
 concept Endereco {
@@ -52,7 +58,7 @@ participant Medico extends Pessoa {
 }
 
 participant Fornecedor extends Pessoa {
-  o String especialidade
+  o EspecialidadeFornecedor especialidade
 }
 
 participant Hospital identified by hospitalId {
@@ -69,7 +75,7 @@ participant Hospital identified by hospitalId {
 asset Exame identified by exameId {
   o String exameId
   o String nome
-  o String especialidade
+  o EspecialidadeFornecedor especialidade
   o ExameStatus status
   o DateTime dataSolicitacao
   o DateTime dataResultado optional
@@ -92,7 +98,7 @@ asset Consulta identified by consultaId {
 
 transaction MarcarExame {
   o String nome
-  o String especialidade
+  o EspecialidadeFornecedor especialidade
   --> Medico medico
   --> Paciente paciente
   --> Hospital hospital
@@ -122,6 +128,11 @@ transaction IniciarConsulta {
 
 transaction FinalizarConsulta {
   --> Consulta consulta
+}
+
+transaction ContratarFornecedor {
+  --> Fornecedor fornecedor
+  --> Hospital hospital
 }
 
 /*** EVENT ***/
