@@ -45,11 +45,11 @@ rule CommonReadNetwork {
 }
 
 /* Paciente */
-rule PacienteReadOwnNovoExames {
+rule PacienteReadOwnMarcarExames {
   description: "Allow pacientes to view their exames"
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
-  resource(t): "com.ita.stagiopbd.NovoExame"
+  resource(t): "com.ita.stagiopbd.MarcarExame"
   condition: (t.paciente.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -57,7 +57,7 @@ rule PacienteReadOwnExamesIniciados {
   description: "Allow pacientes to view their exames iniciados"
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
-  resource(t): "com.ita.stagiopbd.ExameIniciado"
+  resource(t): "com.ita.stagiopbd.IniciarExame"
   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -65,7 +65,7 @@ rule PacienteReadOwnExamesFinalizados {
   description: "Allow pacientes to view their exames finalizados"
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
-  resource(t): "com.ita.stagiopbd.ExameFinalizado"
+  resource(t): "com.ita.stagiopbd.FinalizarExame"
   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -73,7 +73,7 @@ rule PacienteReadOwnNovosExamesEventos {
   description: "Allow pacientes to view their novos exames events"
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
-  resource(t): "com.ita.stagiopbd.NovoExameEvent"
+  resource(t): "com.ita.stagiopbd.MarcarExameEvent"
   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -81,7 +81,7 @@ rule PacienteReadOwnExamesIniciadosEventos {
   description: "Allow pacientes to view their exames iniciados events"
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
-  resource(t): "com.ita.stagiopbd.ExameIniciadoEvent"
+  resource(t): "com.ita.stagiopbd.IniciarExameEvent"
   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -89,7 +89,7 @@ rule PacienteReadOwnExamesFinalizadosEventos {
   description: "Allow pacientes to view their exames finalizados events"
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
-  resource(t): "com.ita.stagiopbd.ExameFinalizadoEvent"
+  resource(t): "com.ita.stagiopbd.FinalizarExameEvent"
   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -178,17 +178,17 @@ rule PacienteReadHistorianRecord {
   participant(c): "com.ita.stagiopbd.Paciente"
   operation: READ
   resource(hr): "org.hyperledger.composer.system.HistorianRecord"
-  condition: ((hr.transactionType == "com.ita.stagiopbd.NovoExame"  || hr.transactionType == "com.ita.stagiopbd.ExameIniciado" || hr.transactionType == "com.ita.stagiopbd.ExameFinalizado" || hr.transactionType == "com.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "com.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "com.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.paciente.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.paciente.getIdentifier() == c.getIdentifier())))
+  condition: ((hr.transactionType == "com.ita.stagiopbd.MarcarExame"  || hr.transactionType == "com.ita.stagiopbd.IniciarExame" || hr.transactionType == "com.ita.stagiopbd.FinalizarExame" || hr.transactionType == "com.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "com.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "com.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.paciente.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.paciente.getIdentifier() == c.getIdentifier())))
   action: ALLOW
 }
 
 
 /* Medico */
-rule MedicoReadOwnNovoExames {
+rule MedicoReadOwnMarcarExames {
   description: "Allow medicos to view their exames"
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
-  resource(t): "com.ita.stagiopbd.NovoExame"
+  resource(t): "com.ita.stagiopbd.MarcarExame"
   condition: (t.medico.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -196,7 +196,7 @@ rule MedicoReadOwnExamesIniciados {
   description: "Allow medicos to view their exames iniciados"
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
-  resource(t): "com.ita.stagiopbd.ExameIniciado"
+  resource(t): "com.ita.stagiopbd.IniciarExame"
   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -204,7 +204,7 @@ rule MedicoReadOwnExamesFinalizados {
   description: "Allow medicos to view their exames finalizados"
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
-  resource(t): "com.ita.stagiopbd.ExameFinalizado"
+  resource(t): "com.ita.stagiopbd.FinalizarExame"
   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -212,7 +212,7 @@ rule MedicoReadOwnNovosExamesEventos {
   description: "Allow medicos to view their novos exames events"
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
-  resource(t): "com.ita.stagiopbd.NovoExameEvent"
+  resource(t): "com.ita.stagiopbd.MarcarExameEvent"
   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -220,7 +220,7 @@ rule MedicoReadOwnExamesIniciadosEventos {
   description: "Allow medicos to view their exames iniciados events"
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
-  resource(t): "com.ita.stagiopbd.ExameIniciadoEvent"
+  resource(t): "com.ita.stagiopbd.IniciarExameEvent"
   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -228,7 +228,7 @@ rule MedicoReadOwnExamesFinalizadosEventos {
   description: "Allow medicos to view their exames finalizados events"
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
-  resource(t): "com.ita.stagiopbd.ExameFinalizadoEvent"
+  resource(t): "com.ita.stagiopbd.FinalizarExameEvent"
   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
   action: ALLOW
 }
@@ -316,7 +316,7 @@ rule MedicoReadHistorianRecord {
   participant(c): "com.ita.stagiopbd.Medico"
   operation: READ
   resource(hr): "org.hyperledger.composer.system.HistorianRecord"
-  condition: ((hr.transactionType == "com.ita.stagiopbd.NovoExame"  || hr.transactionType == "com.ita.stagiopbd.ExameIniciado" || hr.transactionType == "com.ita.stagiopbd.ExameFinalizado" || hr.transactionType == "com.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "com.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "com.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.medico.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.medico.getIdentifier() == c.getIdentifier())))
+  condition: ((hr.transactionType == "com.ita.stagiopbd.MarcarExame"  || hr.transactionType == "com.ita.stagiopbd.IniciarExame" || hr.transactionType == "com.ita.stagiopbd.FinalizarExame" || hr.transactionType == "com.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "com.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "com.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.medico.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.medico.getIdentifier() == c.getIdentifier())))
   action: ALLOW
 }
 

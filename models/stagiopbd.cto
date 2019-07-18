@@ -1,15 +1,7 @@
 
 namespace com.ita.stagiopbd
 
-concept Endereco {
-  o String municipio
-  o String uf
-  o String logradouro
-  o String numero
-  o String complemento optional
-  o String bairro
-  o String cep
-}
+/*** ENUM ***/
 
 enum ExameStatus {
   o PENDENTE
@@ -28,12 +20,24 @@ enum ConsultaTipo {
   o RETORNO
 }
 
-/*** PARTICIPANTS ***/
+/*** CONCEPT ***/
+
+concept Endereco {
+  o String municipio
+  o String uf
+  o String logradouro
+  o String numero
+  o String complemento optional
+  o String bairro
+  o String cep
+}
+
+/*** PARTICIPANT ***/
 
 abstract participant Pessoa identified by pessoaId {
   o String pessoaId
   o String nome
-  o String cpf
+  o String cpf_cnpj
   o String dataNascimento
   o String email
   o Endereco endereco
@@ -47,16 +51,31 @@ participant Medico extends Pessoa {
   o String crm
 }
 
-/*** ASSETS ***/
+participant Fornecedor extends Pessoa {
+  o String especialidade
+}
+
+participant Hospital identified by hospitalId {
+  o String hospitalId
+  o String nome
+  o Endereco endereco
+  o String cnpj
+  o String telefone
+  --> Fornecedor[] fornecedores optional
+}
+
+/*** ASSET ***/
 
 asset Exame identified by exameId {
   o String exameId
   o String nome
+  o String especialidade
   o ExameStatus status
   o DateTime dataSolicitacao
   o DateTime dataResultado optional
   --> Paciente paciente
   --> Medico medico
+  --> Hospital hospital
 }
 
 asset Consulta identified by consultaId {
@@ -66,28 +85,35 @@ asset Consulta identified by consultaId {
   o ConsultaTipo tipo
   --> Medico medico
   --> Paciente paciente
+  --> Hospital hospital
 }
 
-/*** TRANSACTIONS ***/
+/*** TRANSACTION ***/
 
-transaction NovoExame {
+transaction MarcarExame {
+  o String nome
+  o String especialidade
   --> Medico medico
   --> Paciente paciente
+  --> Hospital hospital
+  --> Exame exame optional
+}
+
+transaction IniciarExame {
   --> Exame exame
 }
 
-transaction ExameIniciado {
-  --> Exame exame
-}
-
-transaction ExameFinalizado {
+transaction FinalizarExame {
   --> Exame exame
 }
 
 transaction MarcarConsulta {
+  o DateTime dataConsulta
+  o ConsultaTipo tipo
   --> Medico medico
   --> Paciente paciente
-  --> Consulta consulta
+  --> Hospital hospital
+  --> Consulta consulta optional
 }
 
 transaction IniciarConsulta {
@@ -98,17 +124,17 @@ transaction FinalizarConsulta {
   --> Consulta consulta
 }
 
-/*** EVENTS ***/
+/*** EVENT ***/
 
-event NovoExameEvent {
+event MarcarExameEvent {
   --> Exame exame
 }
 
-event ExameIniciadoEvent {
+event IniciarExameEvent {
   --> Exame exame
 }
 
-event ExameFinalizadoEvent {
+event FinalizarExameEvent {
   --> Exame exame
 }
 
