@@ -82,6 +82,7 @@ asset Exame identified by exameId {
   --> Paciente paciente
   --> Medico medico
   --> Hospital hospital
+  --> Fornecedor fornecedor
 }
 
 asset Consulta identified by consultaId {
@@ -98,21 +99,13 @@ asset Consulta identified by consultaId {
 
 /*** TRANSACTION ***/
 
-transaction MarcarExame {
+transaction SolicitarExame {
   o String nome
   o EspecialidadeFornecedor especialidade
   --> Medico medico
   --> Paciente paciente
   --> Hospital hospital
   --> Exame exame optional
-}
-
-transaction IniciarExame {
-  --> Exame exame
-}
-
-transaction FinalizarExame {
-  --> Exame exame
 }
 
 transaction MarcarConsulta {
@@ -139,8 +132,12 @@ transaction ContratarFornecedor {
   --> Hospital hospital
 }
 
-transaction EnviarExameParaFornecedor {
-  --> Hospital hospital
+transaction IniciarExameFornecedor {
+  --> Fornecedor fornecedor
+  --> Exame exame
+}
+
+transaction FinalizarExameFornecedor {
   --> Fornecedor fornecedor
   --> Exame exame
 }
