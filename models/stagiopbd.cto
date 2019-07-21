@@ -44,7 +44,7 @@ abstract participant Pessoa identified by pessoaId {
   o String pessoaId
   o String nome
   o String cpf_cnpj
-  o String dataNascimento
+  o DateTime dataNascimento
   o String email
   o Endereco endereco
   o String observacao optional
@@ -89,6 +89,8 @@ asset Consulta identified by consultaId {
   o DateTime dataConsulta
   o ConsultaStatus status
   o ConsultaTipo tipo
+  o String sintomasPaciente optional
+  o String observacoesMedico optional
   --> Medico medico
   --> Paciente paciente
   --> Hospital hospital
@@ -127,6 +129,8 @@ transaction IniciarConsulta {
 }
 
 transaction FinalizarConsulta {
+  o String sintomasPaciente
+  o String observacoesMedico
   --> Consulta consulta
 }
 
@@ -139,6 +143,14 @@ transaction EnviarExameParaFornecedor {
   --> Hospital hospital
   --> Fornecedor fornecedor
   --> Exame exame
+}
+
+transaction SetupDemo {
+  o Integer qtdPacientes
+  o Integer qtdMedicos
+  o Integer qtdFornecedores
+  o EspecialidadeFornecedor especialidade
+  o Integer qtdHospitais
 }
 
 /*** EVENT ***/
