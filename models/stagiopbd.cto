@@ -26,6 +26,12 @@ enum EspecialidadeFornecedor {
   o EXAME_HIV
 }
 
+enum ResultadoStatus {
+  o POSITIVO
+  o NEGATIVO
+  o INCONCLUSIVO
+}
+
 /*** CONCEPT ***/
 
 concept Endereco {
@@ -36,6 +42,12 @@ concept Endereco {
   o String complemento optional
   o String bairro
   o String cep
+}
+
+concept ResultadoExame {
+  o String descricao
+  o DateTime dataResultado
+  o ResultadoStatus status
 }
 
 /*** PARTICIPANT ***/
@@ -78,7 +90,7 @@ asset Exame identified by exameId {
   o EspecialidadeFornecedor especialidade
   o ExameStatus status
   o DateTime dataSolicitacao
-  o DateTime dataResultado optional
+  o ResultadoExame resultado optional
   --> Paciente paciente
   --> Medico medico
   --> Hospital hospital
@@ -138,6 +150,9 @@ transaction IniciarExameFornecedor {
 }
 
 transaction FinalizarExameFornecedor {
+  o String descricao
+  o ResultadoStatus status
+  o DateTime dataResultado optional
   --> Fornecedor fornecedor
   --> Exame exame
 }
