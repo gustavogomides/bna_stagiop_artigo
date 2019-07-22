@@ -82,6 +82,17 @@ participant Hospital identified by hospitalId {
   --> Fornecedor[] fornecedores optional
 }
 
+participant Notificacao identified by notificacaoId {
+  o String notificacaoId
+  o String tipo
+  o String origem
+  o String destino
+  o DateTime data
+  o String titulo
+  o String msg
+  o String protocolo optional
+}
+
 /*** ASSET ***/
 
 asset Exame identified by exameId {
@@ -163,30 +174,4 @@ transaction SetupDemo {
   o Integer qtdFornecedores
   o EspecialidadeFornecedor especialidade
   o Integer qtdHospitais
-}
-
-/*** EVENT ***/
-
-event MarcarExameEvent {
-  --> Exame exame
-}
-
-event IniciarExameEvent {
-  --> Exame exame
-}
-
-event FinalizarExameEvent {
-  --> Exame exame
-}
-
-event MarcarConsultaEvent {
-  --> Consulta consulta
-}
-
-event IniciarConsultaEvent {
-  --> Consulta consulta
-}
-
-event FinalizarConsultaEvent {
-  --> Consulta consulta
 }
