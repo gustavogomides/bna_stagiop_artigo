@@ -47,138 +47,138 @@ rule CommonReadNetwork {
 // /* Paciente */
 // rule PacienteReadOwnMarcarExames {
 //   description: "Allow pacientes to view their exames"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.MarcarExame"
+//   resource(t): "br.ita.stagiopbd.MarcarExame"
 //   condition: (t.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnExamesIniciados {
 //   description: "Allow pacientes to view their exames iniciados"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.IniciarExame"
+//   resource(t): "br.ita.stagiopbd.IniciarExame"
 //   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnExamesFinalizados {
 //   description: "Allow pacientes to view their exames finalizados"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.FinalizarExame"
+//   resource(t): "br.ita.stagiopbd.FinalizarExame"
 //   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnNovosExamesEventos {
 //   description: "Allow pacientes to view their novos exames events"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.MarcarExameEvent"
+//   resource(t): "br.ita.stagiopbd.MarcarExameEvent"
 //   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnExamesIniciadosEventos {
 //   description: "Allow pacientes to view their exames iniciados events"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.IniciarExameEvent"
+//   resource(t): "br.ita.stagiopbd.IniciarExameEvent"
 //   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnExamesFinalizadosEventos {
 //   description: "Allow pacientes to view their exames finalizados events"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.FinalizarExameEvent"
+//   resource(t): "br.ita.stagiopbd.FinalizarExameEvent"
 //   condition: (t.exame.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnLots {
 //   description: "Allow pacientes to view exames they own"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(s): "com.ita.stagiopbd.Exame"
+//   resource(s): "br.ita.stagiopbd.Exame"
 //   condition: (s.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW  
 // }
 // rule PacienteReadOwnConsultasMarcadas {
 //   description: "Allow pacientes to view their consultas"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.MarcarConsulta"
+//   resource(t): "br.ita.stagiopbd.MarcarConsulta"
 //   condition: (t.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnConsultasIniciadas {
 //   description: "Allow pacientes to view their consultas iniciadas"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.IniciarConsulta"
+//   resource(t): "br.ita.stagiopbd.IniciarConsulta"
 //   condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnConsultasFinalizadas {
 //   description: "Allow pacientes to view their consultas finalizadas"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.FinalizarConsulta"
+//   resource(t): "br.ita.stagiopbd.FinalizarConsulta"
 //   condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnConsultasMarcadasEventos {
 //   description: "Allow pacientes to view their novos consultas events"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.MarcarConsultaEvent"
+//   resource(t): "br.ita.stagiopbd.MarcarConsultaEvent"
 //   condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnConsultasIniciadasEventos {
 //   description: "Allow pacientes to view their consultas iniciados events"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.IniciarConsultaEvent"
+//   resource(t): "br.ita.stagiopbd.IniciarConsultaEvent"
 //   condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnConsultasFinalizadasEventos {
 //   description: "Allow pacientes to view their consultas finalizados events"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.FinalizarConsultaEvent"
+//   resource(t): "br.ita.stagiopbd.FinalizarConsultaEvent"
 //   condition: (t.consulta.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule PacienteReadOwnConsultas {
 //   description: "Allow pacientes to view consultas they own"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(s): "com.ita.stagiopbd.Consulta"
+//   resource(s): "br.ita.stagiopbd.Consulta"
 //   condition: (s.paciente.getIdentifier() == c.getIdentifier())
 //   action: ALLOW  
 // }
 // rule PacienteReadOwnPaciente {
 //   description: "Allow pacientes to view their info"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource(cc): "com.ita.stagiopbd.Paciente"
+//   resource(cc): "br.ita.stagiopbd.Paciente"
 //   condition: (cc.getIdentifier() == c.getIdentifier())
 //   action: ALLOW  
 // }
 // rule PacienteReadMedicos {
 //   description: "Allow pacientes to view medicos"
-//   participant: "com.ita.stagiopbd.Paciente"
+//   participant: "br.ita.stagiopbd.Paciente"
 //   operation: READ
-//   resource: "com.ita.stagiopbd.Medico"
+//   resource: "br.ita.stagiopbd.Medico"
 //   action: ALLOW
 // }
 
 // rule PacienteReadHistorianRecord {
 //   description: "Allow pacientes to view their historian records"
-//   participant(c): "com.ita.stagiopbd.Paciente"
+//   participant(c): "br.ita.stagiopbd.Paciente"
 //   operation: READ
 //   resource(hr): "org.hyperledger.composer.system.HistorianRecord"
-//   condition: ((hr.transactionType == "com.ita.stagiopbd.MarcarExame"  || hr.transactionType == "com.ita.stagiopbd.IniciarExame" || hr.transactionType == "com.ita.stagiopbd.FinalizarExame" || hr.transactionType == "com.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "com.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "com.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.paciente.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.paciente.getIdentifier() == c.getIdentifier())))
+//   condition: ((hr.transactionType == "br.ita.stagiopbd.MarcarExame"  || hr.transactionType == "br.ita.stagiopbd.IniciarExame" || hr.transactionType == "br.ita.stagiopbd.FinalizarExame" || hr.transactionType == "br.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "br.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "br.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.paciente.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.paciente.getIdentifier() == c.getIdentifier())))
 //   action: ALLOW
 // }
 
@@ -186,137 +186,137 @@ rule CommonReadNetwork {
 // /* Medico */
 // rule MedicoReadOwnMarcarExames {
 //   description: "Allow medicos to view their exames"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.MarcarExame"
+//   resource(t): "br.ita.stagiopbd.MarcarExame"
 //   condition: (t.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnExamesIniciados {
 //   description: "Allow medicos to view their exames iniciados"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.IniciarExame"
+//   resource(t): "br.ita.stagiopbd.IniciarExame"
 //   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnExamesFinalizados {
 //   description: "Allow medicos to view their exames finalizados"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.FinalizarExame"
+//   resource(t): "br.ita.stagiopbd.FinalizarExame"
 //   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnNovosExamesEventos {
 //   description: "Allow medicos to view their novos exames events"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.MarcarExameEvent"
+//   resource(t): "br.ita.stagiopbd.MarcarExameEvent"
 //   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnExamesIniciadosEventos {
 //   description: "Allow medicos to view their exames iniciados events"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.IniciarExameEvent"
+//   resource(t): "br.ita.stagiopbd.IniciarExameEvent"
 //   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnExamesFinalizadosEventos {
 //   description: "Allow medicos to view their exames finalizados events"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.FinalizarExameEvent"
+//   resource(t): "br.ita.stagiopbd.FinalizarExameEvent"
 //   condition: (t.exame.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnLots {
 //   description: "Allow medicos to view exames they own"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(s): "com.ita.stagiopbd.Exame"
+//   resource(s): "br.ita.stagiopbd.Exame"
 //   condition: (s.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW  
 // }
 // rule MedicoReadOwnConsultasMarcadas {
 //   description: "Allow pacientes to view their consultas"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.MarcarConsulta"
+//   resource(t): "br.ita.stagiopbd.MarcarConsulta"
 //   condition: (t.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnConsultasIniciadas {
 //   description: "Allow pacientes to view their consultas iniciadas"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.IniciarConsulta"
+//   resource(t): "br.ita.stagiopbd.IniciarConsulta"
 //   condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnConsultasFinalizadas {
 //   description: "Allow pacientes to view their consultas finalizadas"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.FinalizarConsulta"
+//   resource(t): "br.ita.stagiopbd.FinalizarConsulta"
 //   condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnConsultasMarcadasEventos {
 //   description: "Allow pacientes to view their novos consultas events"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.MarcarConsultaEvent"
+//   resource(t): "br.ita.stagiopbd.MarcarConsultaEvent"
 //   condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnConsultasIniciadasEventos {
 //   description: "Allow pacientes to view their consultas iniciados events"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.IniciarConsultaEvent"
+//   resource(t): "br.ita.stagiopbd.IniciarConsultaEvent"
 //   condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnConsultasFinalizadasEventos {
 //   description: "Allow pacientes to view their consultas finalizados events"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(t): "com.ita.stagiopbd.FinalizarConsultaEvent"
+//   resource(t): "br.ita.stagiopbd.FinalizarConsultaEvent"
 //   condition: (t.consulta.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW
 // }
 // rule MedicoReadOwnConsultas {
 //   description: "Allow pacientes to view consultas they own"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(s): "com.ita.stagiopbd.Consulta"
+//   resource(s): "br.ita.stagiopbd.Consulta"
 //   condition: (s.medico.getIdentifier() == c.getIdentifier())
 //   action: ALLOW  
 // }
 // rule MedicoReadOwnMedico {
 //   description: "Allow medicos to view their info"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
-//   resource(cc): "com.ita.stagiopbd.Medico"
+//   resource(cc): "br.ita.stagiopbd.Medico"
 //   condition: (cc.getIdentifier() == c.getIdentifier())
 //   action: ALLOW  
 // }
 // // rule MedicoReadPacientes {
 // //   description: "Allow medicos to view pacientes"
-// //   participant: "com.ita.stagiopbd.Medico"
+// //   participant: "br.ita.stagiopbd.Medico"
 // //   operation: READ
-// //   resource: "com.ita.stagiopbd.Medico"
+// //   resource: "br.ita.stagiopbd.Medico"
 // //   action: ALLOW
 // // }
 // rule MedicoReadHistorianRecord {
 //   description: "Allow medicos to view their historian records"
-//   participant(c): "com.ita.stagiopbd.Medico"
+//   participant(c): "br.ita.stagiopbd.Medico"
 //   operation: READ
 //   resource(hr): "org.hyperledger.composer.system.HistorianRecord"
-//   condition: ((hr.transactionType == "com.ita.stagiopbd.MarcarExame"  || hr.transactionType == "com.ita.stagiopbd.IniciarExame" || hr.transactionType == "com.ita.stagiopbd.FinalizarExame" || hr.transactionType == "com.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "com.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "com.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.medico.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.medico.getIdentifier() == c.getIdentifier())))
+//   condition: ((hr.transactionType == "br.ita.stagiopbd.MarcarExame"  || hr.transactionType == "br.ita.stagiopbd.IniciarExame" || hr.transactionType == "br.ita.stagiopbd.FinalizarExame" || hr.transactionType == "br.ita.stagiopbd.MarcarConsulta" || hr.transactionType == "br.ita.stagiopbd.IniciarConsulta" || hr.transactionType == "br.ita.stagiopbd.FinalizarConsulta") && ((hr.transactionInvoked.exame && hr.transactionInvoked.exame.medico.getIdentifier() == c.getIdentifier()) || (hr.transactionInvoked.consulta && hr.transactionInvoked.consulta.medico.getIdentifier() == c.getIdentifier())))
 //   action: ALLOW
 // }
 
