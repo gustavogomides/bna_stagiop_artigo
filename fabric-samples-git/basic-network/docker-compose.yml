@@ -22,7 +22,7 @@ services:
     volumes:
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
     extra_hosts:
-      - "peer1.org1.example.com:34.66.24.32"
+      - "peer1.org1.example.com:35.239.125.251"
     container_name: ca.example.com
     networks:
       - basic
@@ -47,7 +47,7 @@ services:
         - ./crypto-config/ordererOrganizations/example.com/orderers/orderer.example.com/:/etc/hyperledger/msp/orderer
         - ./crypto-config/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/:/etc/hyperledger/msp/peerOrg1
     extra_hosts:
-      - "peer1.org1.example.com:34.66.24.32"
+      - "peer1.org1.example.com:35.239.125.251"
     networks:
       - basic
 
@@ -85,7 +85,7 @@ services:
         - ./crypto-config/peerOrganizations/org1.example.com/users:/etc/hyperledger/msp/users
         - ./config:/etc/hyperledger/configtx
     extra_hosts:
-      - "peer1.org1.example.com:34.66.24.32"
+      - "peer1.org1.example.com:35.239.125.251"
     depends_on:
       - orderer.example.com
       - couchdb
@@ -101,7 +101,7 @@ services:
       - COUCHDB_USER=
       - COUCHDB_PASSWORD=
     extra_hosts:
-      - "peer1.org1.example.com:34.66.24.32"
+      - "peer1.org1.example.com:35.239.125.251"
     ports:
       - 5984:5984
     networks:
@@ -127,7 +127,7 @@ services:
         - ./../chaincode/:/opt/gopath/src/github.com/
         - ./crypto-config:/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/
     extra_hosts:
-      - "peer1.org1.example.com:34.66.24.32"
+      - "peer1.org1.example.com:35.239.125.251"
     networks:
         - basic
     #depends_on:
