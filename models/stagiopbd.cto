@@ -1,7 +1,13 @@
 
-namespace com.ita.stagiopbd
+namespace br.ita.stagiopbd
 
 /*** ENUM ***/
+
+enum AutorizacaoStatus {
+  o PENDENTE
+  o ATIVA
+  o INATIVA
+}
 
 enum ExameStatus {
   o PENDENTE
@@ -120,6 +126,16 @@ asset Consulta identified by consultaId {
   --> Hospital hospital
 }
 
+asset AutorizacoesPacientes identified by autorizacaoId {
+  o String autorizacaoId
+  o DateTime dataAutorizacao optional
+  o DateTime dataRevogacao optional
+  o DateTime dataSolicitacao optional
+  o AutorizacaoStatus status
+  --> Paciente paciente
+  --> Hospital hospital
+}
+
 /*** TRANSACTION ***/
 
 transaction SolicitarExame {
@@ -166,6 +182,21 @@ transaction FinalizarExameFornecedor {
   o DateTime dataResultado optional
   --> Fornecedor fornecedor
   --> Exame exame
+}
+
+transaction SolicitarAcessoDados {
+  --> Paciente paciente
+  --> Hospital hospital
+}
+
+transaction AutorizarAcessoDados {
+  --> Paciente paciente
+  --> Hospital hospital
+}
+
+transaction RevogarAcessoDados {
+  --> Paciente paciente
+  --> Hospital hospital
 }
 
 transaction SetupDemo {
